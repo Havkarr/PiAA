@@ -110,39 +110,32 @@ char board::checkIfEnd()
         }
     }
 
+
     // Sprawdź przekątne
+    temp = b[0][0];
+    victory = true;
+  
     for (int i = 0; i < size; i++)
-    {
-        victory = true;
-        if (b[0][0] == 'E')
-        {
-            continue;
-        }
-        temp = b[0][0];
-        
-        if (b[i][i] != temp)
+    {           
+        if (b[i][i] != temp || temp == 'E')
         {
             victory = false;
             break;
         }
     }
-
+    
     if (victory == true)
     {
         return b[0][0];
     }
 
     // Sprawdź drugą przekątną
+    victory = true;
+    temp = b[size-1][0];
+
     for (int i = 0; i < size; i++)
     {
-        victory = true;
-        if (b[size-1][0] == 'E')
-        {
-            continue;
-        }
-        temp = b[size-1][0];
-        
-        if (b[size-1][i] != temp)
+        if (b[size-i-1][i] != temp || temp == 'E')
         {
             victory = false;
             break;

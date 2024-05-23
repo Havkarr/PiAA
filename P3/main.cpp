@@ -53,12 +53,9 @@ int main(void)
                 }
                 else // Ruch komputera
                 {
-                    while (!correctMove)
-                    {
-                        correctMove = ttt.placeChar((rand()%s)+1,(rand()%s)+1,ai);
-                    }
-
-                    correctMove = false;
+                    position nextPosition = nextMove(ttt, ai);
+                    ttt.placeChar(nextPosition.row, nextPosition.col, ai);
+            
                     playerMove = !playerMove;
                 }
                 
@@ -67,17 +64,17 @@ int main(void)
             }
             
             // Napisz kto wygrał
-            if (roundNumber == 0)
+            if (whoWon == 'O')
             {
-                cout << "Remis!\n";
+                cout << "Wygralo O!\n";
             }
             else if (whoWon == 'X')
             {
                 cout << "Wygral X!\n";
             }
-            else
+            else if (roundNumber == 0)
             {
-                cout << "Wygralo O!\n";
+                cout << "Remis!\n";
             }
 
             whoWon = 'E';

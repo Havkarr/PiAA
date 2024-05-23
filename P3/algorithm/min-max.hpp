@@ -9,7 +9,10 @@ struct position
 };
 
 
-int minMax_X(board b, int depth, int alpha, int beta, bool maximizingPlayer);
+int minMax_X(board &b, int depth, int alpha, int beta, bool maximizingPlayer);
 
 
-int minMax_O(board b, int depth, int alpha, int beta, bool maximizingPlayer);
+int minMax_O(board &b, int depth, int alpha, int beta, bool maximizingPlayer);
+
+
+position nextMove(board &b, char whoAmI);
