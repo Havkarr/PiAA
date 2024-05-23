@@ -38,7 +38,7 @@ void board::displayBoard()
 bool board::placeChar(int row, int column, char c)
 {
     // Sprawdz czy pole jest na planszy
-    if (row-1 < 0 || row-1 > size || column-1 < 0 || column-1 > size)
+    if (row-1 < 0 || row-1 > size || column-1 < 0 || column-1 > size )
     {
         cout << "Podano zle wspolrzedne. Sprobuj ponownie.\n";
         return false;
@@ -157,8 +157,8 @@ int board::getSize()
 
 char board::getElement(int row, int col)
 {
-     // Sprawdz czy pole jest na planszy
-    if (row-1 < 0 || row-1 > size || col-1 < 0 || col-1 > size)
+    // Sprawdz czy pole jest na planszy
+    if (row < 0 || row > size || col < 0 || col > size)
     {
         return 'E';
     }

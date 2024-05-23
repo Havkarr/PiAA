@@ -1,6 +1,7 @@
 #include "board/tic-tac-toe.hpp"
 #include "algorithm/min-max.hpp"
 #include <iostream>
+#include <windows.h>
 
 using namespace std;
 
@@ -13,8 +14,6 @@ int main(void)
     cout << "Tic-tac-toe!\n----------------------------------------------------------------\n\n" 
         << "Podaj rozmiar planszy(dlugosc jednego boku): ";
     cin >> s;
-
-    srand(time(NULL));
 
     // Sprawdź czy gracz podał poprawny rozmiar planszy
     if (s < 0 || cin.fail())
@@ -45,6 +44,15 @@ int main(void)
                     {
                         cout << "Podaj gdzie chcesz wstawic znak: ";
                         cin >> r >> c;
+
+                        if (isalpha(r) || isalpha(c))
+                        {
+                            cout << "Podano zle wspolrzedne\n";
+                            cin.clear();
+                            cin.ignore(100, '\n');
+                            continue;
+                        }
+                        
                         correctMove = ttt.placeChar(r,c,player);
                     }
 
@@ -54,8 +62,9 @@ int main(void)
                 else // Ruch komputera
                 {
                     position nextPosition = nextMove(ttt, ai); // Oblicz za pomoca min-max nastepny ruch
+
                     ttt.placeChar(nextPosition.row, nextPosition.col, ai);
-            
+
                     playerMove = !playerMove;
                 }
                 
@@ -83,6 +92,14 @@ int main(void)
         case '2': // Zmiana rozmiaru planszy
             cout << "Podaj rozmiar planszy(dlugosc jednego boku): ";
             cin >> s;
+
+            if (isalpha(s))
+            {
+                cout << "Podano zly rozmiar\n";
+                cin.clear();
+                cin.ignore(100, '\n');
+                s = 3;
+            }
             break;
 
         case '3': // Zamiana symbolu gry
