@@ -3,15 +3,14 @@
 
 using namespace std;
 
-board::board(int rows, int toWin)
+board::board(int rows)
 {
     size = rows;
-    toWin = toWin;
 
     for (int i = 0; i < size; i++)
     {
         b.push_back(vector<char>(size, 'E'));
-        frame += "----";
+        frame += "----"; // Ramka do wypisywania w terminalu
     }
 }
 
@@ -111,7 +110,7 @@ char board::checkIfEnd()
     }
 
 
-    // Sprawdź przekątne
+    // Sprawdź pierwszą przekątną: lewy górny róg -> prawy dolny róg
     temp = b[0][0];
     victory = true;
   
@@ -129,7 +128,7 @@ char board::checkIfEnd()
         return b[0][0];
     }
 
-    // Sprawdź drugą przekątną
+    // Sprawdź drugą przekątną: lewy dolny róg -> prawy górny róg
     victory = true;
     temp = b[size-1][0];
 
@@ -158,6 +157,12 @@ int board::getSize()
 
 char board::getElement(int row, int col)
 {
+     // Sprawdz czy pole jest na planszy
+    if (row-1 < 0 || row-1 > size || col-1 < 0 || col-1 > size)
+    {
+        return 'E';
+    }
+
     return b[row][col];
 }
 

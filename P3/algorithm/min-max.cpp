@@ -10,6 +10,7 @@ int minMax_X(board &b, int depth, int alpha, int beta, bool maximizingPlayer)
     int size = b.getSize();
     char winner = b.checkIfEnd();
     
+    // Sprawdz warunek stopu - czy po ruchu ktoś wygrał
     if (winner == 'X')
     {return 10 + depth;}
     else if (winner == 'O')
@@ -17,6 +18,8 @@ int minMax_X(board &b, int depth, int alpha, int beta, bool maximizingPlayer)
     else if (b.isFull())
     {return 0;}
     
+    // Ruch maksymalizujący
+    // Dla każdego wolnego miejsca rozwiń drzewo rozwiązań i wybierz najlepsze(o największej wartości) rozwiązanie. (Jest to ruch komputera)
     if (maximizingPlayer)
     {
         int maxVal = INT_MIN;
@@ -36,6 +39,8 @@ int minMax_X(board &b, int depth, int alpha, int beta, bool maximizingPlayer)
 
         return maxVal;
     }
+    // Ruch minimalizujący
+    // Dla każdego wolnego miejsca rozwiń drzewo rozwiązań i wybierz najgorsze(o najmniejszej wartości) rozwiązanie. (Jest to ruch człowieka)
     else{
         int minVal = INT_MAX;
         for (int row = 0; row < size; row++)
@@ -62,6 +67,7 @@ int minMax_O(board &b, int depth, int alpha, int beta, bool maximizingPlayer)
     int size = b.getSize();
     char winner = b.checkIfEnd();
     
+    // Sprawdz warunek stopu - czy po ruchu ktoś wygrał
     if (winner == 'O')
     {return 10 + depth;}
     else if (winner == 'X')
@@ -69,6 +75,8 @@ int minMax_O(board &b, int depth, int alpha, int beta, bool maximizingPlayer)
     else if (b.isFull())
     {return 0;}
     
+    // Ruch maksymalizujący
+    // Dla każdego wolnego miejsca rozwiń drzewo rozwiązań i wybierz najlepsze(o największej wartości) rozwiązanie. (Jest to ruch komputera)
     if (maximizingPlayer)
     {
         int maxVal = INT_MIN;
@@ -88,6 +96,8 @@ int minMax_O(board &b, int depth, int alpha, int beta, bool maximizingPlayer)
 
         return maxVal;
     }
+    // Ruch minimalizujący
+    // Dla każdego wolnego miejsca rozwiń drzewo rozwiązań i wybierz najgorsze(o najmniejszej wartości) rozwiązanie. (Jest to ruch człowieka)
     else{
         int minVal = INT_MAX;
         for (int row = 0; row < size; row++)
@@ -115,6 +125,7 @@ position nextMove(board &b, char whoAmI)
 
     position bestMove{-1,-1};
 
+    // Dla każdej wolnej komórki wstaw znak i rozwiń drzewo rozwiązań.
     for (int row = 0; row < b.getSize(); row++)
     {
         for (int col = 0; col < b.getSize(); col++)
@@ -122,9 +133,11 @@ position nextMove(board &b, char whoAmI)
             if (b.getElement(row,col) == 'E')
             {
                 b.placeChar(row+1,col+1,whoAmI);
+                // Oblicz wartość dla podanego ruchu
                 int score = whoAmI == 'X' ? minMax_X(b, b.getSize(),INT_MAX,INT_MIN,false) : minMax_O(b, b.getSize(),INT_MAX,INT_MIN,false);
-                cout << score << endl;
+                // Wycofaj ruch
                 b.removeElement(row+1,col+1);
+                // Przypisz współrzędne dla najlepszego ruchu
                 if (score > rank)
                 {
                     rank = score;

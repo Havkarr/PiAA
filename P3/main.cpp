@@ -53,7 +53,7 @@ int main(void)
                 }
                 else // Ruch komputera
                 {
-                    position nextPosition = nextMove(ttt, ai);
+                    position nextPosition = nextMove(ttt, ai); // Oblicz za pomoca min-max nastepny ruch
                     ttt.placeChar(nextPosition.row, nextPosition.col, ai);
             
                     playerMove = !playerMove;
