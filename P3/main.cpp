@@ -1,7 +1,7 @@
+// g++ main.cpp board/tic-tac-toe.cpp algorithm/min-max.cpp -o main
 #include "board/tic-tac-toe.hpp"
 #include "algorithm/min-max.hpp"
 #include <iostream>
-#include <windows.h>
 
 using namespace std;
 
@@ -35,6 +35,7 @@ int main(void)
             // Graj dopóki ktoś nie wygra lub nie będzie remisu
             while (whoWon == 'E' && roundNumber > 0)
             {
+                system("cls");
                 ttt.displayBoard();
 
                 if (playerMove == true) // Ruch gracza
@@ -62,7 +63,6 @@ int main(void)
                 else // Ruch komputera
                 {
                     position nextPosition = nextMove(ttt, ai); // Oblicz za pomoca min-max nastepny ruch
-
                     ttt.placeChar(nextPosition.row, nextPosition.col, ai);
 
                     playerMove = !playerMove;
@@ -75,14 +75,20 @@ int main(void)
             // Napisz kto wygrał
             if (whoWon == 'O')
             {
+                system("cls");
+                ttt.displayBoard();
                 cout << "Wygralo O!\n";
             }
             else if (whoWon == 'X')
             {
+                system("cls");
+                ttt.displayBoard();
                 cout << "Wygral X!\n";
             }
             else if (roundNumber == 0)
             {
+                system("cls");
+                ttt.displayBoard();
                 cout << "Remis!\n";
             }
 
